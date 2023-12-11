@@ -15,13 +15,13 @@ const TodoCreate = ({ createTodo }) => {
     return (
         <form
             onSubmit={hamdleSubmitTodo}
-            className="flex gap-4 mt-8 overflow-hidden rounded-md bg-white p-2 items-center"
+            className="flex gap-4 mt-8 overflow-hidden rounded-md bg-white dark:bg-gray-700 p-2 items-center transition-all duration-1000"
         >
             <span className="inline-block h-5 w-5 rounded-full border-2">
                 {" "}
             </span>
             <input
-                className="w-full text-gray-400 outline-none"
+                className="w-full text-gray-400 outline-none  dark:bg-gray-700 transition-all duration-1000"
                 type="text"
                 placeholder="add task..."
                 value={title}

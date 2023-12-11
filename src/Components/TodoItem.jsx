@@ -4,7 +4,7 @@ import CrossIcon from "../icon/CrossIcon";
 const TodoItem = ({ todo, updateTodo,  removeTodo, pepito }) => {
     const { id, title, completed } = todo;
     return (
-        <article className="flex gap-4 border-b border-b-gray-400 ">
+        <article className="flex gap-4 border-b border-b-gray-400 dark:bg-gray-700 transition-all duration-1000 ">
             <button
                 onClick={() =>updateTodo(id)}
                 className={`h-5 w-5 flex-none rounded-full border-2 ${ completed
@@ -14,7 +14,7 @@ const TodoItem = ({ todo, updateTodo,  removeTodo, pepito }) => {
             completed && <CheckIcon/>
             }
             </button>
-            <p className={`"text-gray-600 grow " ${completed && "line-through"}`}> {title} </p>
+            <p className={`"text-gray-600 dark:text-gray-400 grow " ${completed && "line-through"}`}> {title} </p>
             <button onClick={() => removeTodo(id)}  className="flex-none" >
                 <CrossIcon />
             </button>

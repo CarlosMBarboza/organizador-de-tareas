@@ -1,7 +1,7 @@
 const TodoFilter = ({ changeFilter, filter }) => {
     return (
         <section className="container mx-auto px-4">
-            <div className="mt-8 flex justify-center rounded-md bg-white p-4 gap-4">
+            <div className="mt-8 flex justify-center rounded-md bg-white p-4 gap-4  dark:bg-gray-700 transition-all duration-1000">
                 <button 
                 onClick={() => changeFilter ("all")}  
                 className={`${filter === "all" ? "text-blue-500 hover:text-gray-500"
