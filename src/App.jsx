@@ -1,3 +1,5 @@
+import{DragDropContext, Droppable, Draggable} from "@hello-pangea/dnd"
+
 import TodoComputed from "./Components/TodoComputed";
 import TodoCreate from "./Components/TodoCreate";
 import TodoFilter from "./Components/TodoFilter";
@@ -6,6 +8,12 @@ import TodoList from "./Components/TodoList";
 import { useEffect, useState } from "react";
 
 const initialStateTodos = JSON.parse(localStorage.getItem("todos")) || [];
+const reorder = (list, startIndex, endIndex) => {
+    const result = [...list];
+    const [removed] = result.splice(startIndex, 1);
+    result.splice(endIndex, 0, removed);
+    return result;
+}
 
 const App = () => {
     const [todos, setTodos] = useState(initialStateTodos);
@@ -53,6 +61,13 @@ const App = () => {
                 return todos;
         }
     }
+const handleDragEnd = (result) => {
+    const {destination, source} = result;
+    if(!destination) return;
+    if(destination.index === source.index && 
+        source.droppableId === destination.droppableId) return;
+        setTodos((prevTasks)=> reorder(prevTasks, source.index, destination.index))
+}
 
     return (
         <div className="
@@ -67,12 +82,14 @@ const App = () => {
                 <TodoCreate
                     createTodo={createTodo}
                 />
+                <DragDropContext onDragEnd={handleDragEnd}>
+                        <TodoList
+                        todos={ filteredTodos()}  
+                        removeTodo= { removeTodo}  
+                        updateTodo={ updateTodo} 
+                        />
+                </DragDropContext>
 
-                <TodoList
-                todos={ filteredTodos()}  
-                removeTodo= { removeTodo}  
-                updateTodo={ updateTodo} 
-                />
                 <TodoComputed 
                 computedItemLeft={computedItemLeft}  
                 clearCompleted={ clearCompleted} 
